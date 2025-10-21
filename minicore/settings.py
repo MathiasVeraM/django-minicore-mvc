@@ -20,13 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nan^h$2dx56bbtc9_0w%&g@(cvgauj4wxl(n5(6j$5#ly1v%&5'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECRET_KEY desde env (no en el repo)
+SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-key")
 
-ALLOWED_HOSTS = []
+# DEBUG desde env (en prod debe ser False)
+DEBUG = os.environ.get("DEBUG", "False").lower() in ("true", "1", "yes")
+
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")  # puedes limitar luego
 
 
 # Application definition
@@ -122,8 +123,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DEBUG = True   # en Railway pon False; en local puede ser True
-ALLOWED_HOSTS = ['*']  # cambia luego por el hostname de Railway si quieres seguridad
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
