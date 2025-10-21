@@ -1,0 +1,50 @@
+{% extends "gestorventas/base.html" %}
+{% block content %}
+  <h2>Calcular Bono / Comisión</h2>
+  <form method="post" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-4">
+      <label>Vendedor (opcional)</label>
+      <select name="vendedor" class="form-select">
+        <option value="">Todos</option>
+        {% for v in vendedores %}
+          <option value="{{ v.id }}">{{ v.nombre }} {{ v.apellido }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label>Fecha inicio</label>
+      <input type="date" name="fecha_inicio" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <label>Fecha fin</label>
+      <input type="date" name="fecha_fin" class="form-control">
+    </div>
+    <div class="col-md-2 align-self-end">
+      <button class="btn btn-success w-100" type="submit">Calcular</button>
+    </div>
+  </form>
+
+  {% if resultado %}
+    <hr>
+    <h4>Resultado</h4>
+    <p>Total ventas: <strong>{{ resultado.total }}</strong></p>
+    <p>Bono calculado: <strong>{{ resultado.bono }}</strong></p>
+    {% if resultado.regla %}
+      <p>Regla aplicada: {{ resultado.regla.nombre }} ({{ resultado.regla.porcentaje_comision }}%)</p>
+    {% endif %}
+    <h5>Ventas</h5>
+    <table class="table">
+      <thead><tr><th>Fecha</th><th>Vendedor</th><th>Monto</th></tr></thead>
+      <tbody>
+        {% for venta in resultado.ventas %}
+          <tr>
+            <td>{{ venta.fecha }}</td>
+            <td>{{ venta.vendedor }}</td>
+            <td>{{ venta.monto }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}
