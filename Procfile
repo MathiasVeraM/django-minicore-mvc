@@ -1,1 +1,1 @@
-web: gunicorn minicore.wsgi
+web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn minicore.wsgi
