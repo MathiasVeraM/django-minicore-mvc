@@ -101,13 +101,13 @@ python manage.py runserver
 
 ## Imagenes del sistema en funcionamiento
 1. Index del sistema.  
-![Index del sistema]('screenshots/index.png')
+![Index del sistema](screenshots/index.png)
 2. Creacion de venta.
-![Creacion de venta]('screenshots/venta.png')
+![Creacion de venta](screenshots/venta.png)
 3. Calculo de bono
-![Calculo de bono]('screenshots/bono.png')
+![Calculo de bono](screenshots/bono.png)
 4. Administrador de Django.
-![Administrador de Django]('screenshots/admin.png')
+![Administrador de Django](screenshots/admin.png)
 
 ---
 
